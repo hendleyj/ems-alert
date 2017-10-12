@@ -1,0 +1,11 @@
+textarea {
+    resize: none;
+}
+
+button:disabled {
+    background-color: lightgray;
+}
+
+button:enabled {
+    background-color: lightblue;
+}
