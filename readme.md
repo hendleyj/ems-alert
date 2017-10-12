@@ -44,4 +44,4 @@ A 'waiting for connections' message should be displayed.
 ```bash
 $ ng build && node server.js
 ```
-This will build the site and server. Open http://localhost:3000 in browser.
+This will build the site and server. Open http://localhost:4200 in browser.
