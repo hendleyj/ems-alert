@@ -1,7 +1,7 @@
-#EMS Alert
+# EMS Alert
 
 
-##Requirements
+## Requirements
 - Git (v2.8.4 or higher)
 
 - Node.js (v4.4.4 or higher) 
@@ -15,7 +15,7 @@
 - Express
 
 
-##Setup
+## Setup
 Clone Git Repository
 ```bash
 $ git clone http://link
@@ -33,14 +33,14 @@ $ md \data\db
 
 
 
-##Start MongoDB.
+## Start MongoDB.
 ```bash
 $ C:\mongodb\bin\mongod
 ```
 A 'waiting for connections' message should be displayed.
 
 
-##Build and Start Server
+## Build and Start Server
 ```bash
 $ ng build && node server.js
 ```
