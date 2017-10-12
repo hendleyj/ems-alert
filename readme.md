@@ -19,7 +19,7 @@
 Clone Git Repository
 ```bash
 $ git clone http://link
-$ cd UX-Toolchain
+$ cd EMS-Alert
 ```
 **Note: Project should have the required angular/node dependency files. 
 
