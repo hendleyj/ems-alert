@@ -42,6 +42,6 @@ A 'waiting for connections' message should be displayed.
 
 ## Build and Start Server
 ```bash
-$ ng build && node server.js
+$ ng serve
 ```
 This will build the site and server. Open http://localhost:4200 in browser.
