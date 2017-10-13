@@ -6,8 +6,7 @@
 - Angular (v2 or higher)
 - Express
 
-- Node.js (v4.4.4 or higher) 
-- npm (v3 or higher recommended)
+- Node.js (v4.4.4 or higher) and NPM (v3 or higher recommended)
 **Find both here: https://www.npmjs.com/get-npm
 
 - MongoDB (Community Edition)
