@@ -3,6 +3,8 @@
 
 ## Requirements and Installs
 - Git (v2.8.4 or higher)
+- Angular (v2 or higher)
+- Express
 
 - Node.js (v4.4.4 or higher) 
 - npm (v3 or higher recommended)
@@ -11,8 +13,6 @@
 - MongoDB (Community Edition)
 **View this guide to install for your machine: https://docs.mongodb.com/manual/installation/?_ga=2.130566217.796221208.1507635317-1072944379.1507635317#mongodb-community-edition
 
-- Angular (v2 or higher)
-- Express
 
 ## Clone Git Repository
 You can use the desktop app or the command line interface (altough the desktop app is easier). 
