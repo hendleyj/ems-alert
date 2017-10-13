@@ -14,18 +14,19 @@
 - Angular (v2 or higher)
 - Express
 
-## After installing Node w/ npm
+## Clone Git Repository
+You can use the desktop app or the command line interface (altough the desktop app is easier). 
+
+**Note: Project should have the required angular/node dependency files. 
+
+
+## After installing Node and cloning
 1. Open a terminal or command prompt and go to the repo directory (make sure you point it to the "root" of the project, which is where the package.json file is).
 2. Have NPM install all the dependencies.
 ```bash
 npm install
 ```
 3. UPDATE: After the install completes, replace the directory located at `node_modules\@angular\material` with the directory in the repo at `special_node_modules\@angular\material`.
-
-## Clone Git Repository
-You can use the desktop app or the command line interface (altough the desktop app is easier). 
-
-**Note: Project should have the required angular/node dependency files. 
 
 
 ## Set up MongoDB
