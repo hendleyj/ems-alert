@@ -46,4 +46,8 @@ A 'waiting for connections' message should be displayed.
 ```bash
 $ ng serve
 ```
+or
+```bash
+$ npm start
+```
 This will build the site and server. Open http://localhost:4200 in browser.
