@@ -1,7 +1,7 @@
 # EMS Alert
 
 
-## Requirements
+## Requirements and Installs
 - Git (v2.8.4 or higher)
 
 - Node.js (v4.4.4 or higher) 
@@ -14,26 +14,27 @@
 - Angular (v2 or higher)
 - Express
 
-
-## Setup
-Clone Git Repository
+## After installing Node w/ npm
+1. Open a terminal or command prompt and go to the repo directory (make sure you point it to the "root" of the project, which is where the package.json file is).
+2. Have NPM install all the dependencies.
 ```bash
-$ git clone http://link
-$ cd EMS-Alert
+npm install
 ```
+3. UPDATE: After the install completes, replace the directory located at `node_modules\@angular\material` with the directory in the repo at `special_node_modules\@angular\material`.
+
+## Clone Git Repository
+You can use the desktop app or the command line interface (altough the desktop app is easier). 
+
 **Note: Project should have the required angular/node dependency files. 
 
 
-Set up MongoDB
+## Set up MongoDB
 1. Download/Install MongoDB
-2. Create `\data\db` folder using Command Prompt.  This can be anywhere, but C: drive is easiest.
+2. Create `\data\db` folder using Command Prompt.  This can be anywhere, but C: drive or the root of your HD is easiest.
 ```bash
 $ md \data\db
 ```
-
-
-
-## Start MongoDB.
+3. Start MongoDB.
 ```bash
 $ C:\mongodb\bin\mongod
 ```
