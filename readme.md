@@ -19,7 +19,7 @@ You can use the desktop app or the command line interface (altough the desktop a
 **Note: Project should have the required angular/node dependency files. 
 
 
-## After installing Node and cloning
+## After Installing Node and Cloning the Repository
 1. Open a terminal or command prompt and go to the repo directory (make sure you point it to the "root" of the project, which is where the package.json file is).
 2. Have NPM install all the dependencies.
 ```bash
