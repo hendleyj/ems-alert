@@ -30,7 +30,7 @@ export class CreateCaseComponent {
     }
 
     public onSubmit(): void {
-        this.createdCase = new Case(0,
+        this.createdCase = new Case(this.caseService.cases.length,
             this.caseService.getDate(),
             this.caseForm.get('location').value,
             this.caseForm.get('respondee_name').value,
