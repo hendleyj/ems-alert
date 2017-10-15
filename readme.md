@@ -25,7 +25,6 @@ You can use the desktop app or the command line interface (altough the desktop a
 ```bash
 $ npm install
 ```
-3. UPDATE: After the install completes, replace the directory located at `node_modules\@angular\material` with the directory in the repo at `special_node_modules\@angular\material`.
 
 
 ## Set up MongoDB
@@ -43,10 +42,7 @@ A 'waiting for connections' message should be displayed.
 
 ## Build and Start Server
 ```bash
-$ ng serve
+$ ng build && nodes server.js
 ```
-or
-```bash
-$ npm start
-```
+
 This will build the site and server. Open http://localhost:4200 in browser.
