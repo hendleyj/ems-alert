@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Case = new mongoose.Schema({
+    id: Number,
     date: String,
     location: String,
     respondee_name: String,
