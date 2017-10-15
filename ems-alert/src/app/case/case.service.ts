@@ -25,6 +25,7 @@ export class CaseService {
     // Add user to database
     addCase(new_case: Case): Observable<Response> {
         const data = {
+            id: new_case.id,
             date: new_case.date,
             location: new_case.location,
             respondee_name: new_case.respondee_name,
@@ -60,7 +61,7 @@ export class CaseService {
     // Find case in array
     findCaseById(id: number): Case {
         for (let i = 0; i < this.cases.length; i++) {
-            if (this.cases[i]. === id) {
+            if (this.cases[i].id === id) {
                 return this.cases[i];
             }
         }
