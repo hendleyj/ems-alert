@@ -8,7 +8,7 @@ module.exports = {
         console.log("Creating case...");
         var _case = req.body;
 
-        new Case({ id: _case.id, date: _case.date, location: _case.location, respondee_name: _case.respondee_name,responder_name: _case.responder_name, dispatcher_name: _case.dispatcher_name, notes: _case.notes })
+        new Case({ date: _case.date, location: _case.location, respondee_name: _case.respondee_name,responder_name: _case.responder_name, dispatcher_name: _case.dispatcher_name, notes: _case.notes })
             .save(function (err) {
                 if (err) {
                     res.status(504);

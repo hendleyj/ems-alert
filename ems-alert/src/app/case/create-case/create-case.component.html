@@ -1,37 +1,31 @@
 <!-- Header -->
-<div fxFlex="50" fxLayoutAlign="start center">
-  <h2>New Case</h2>
-</div>
+<h2>New Case</h2>
 
 <!-- Form -->
 <form [formGroup]="caseForm" novalidate>
   <!-- Location Input -->
-  <div>
-    <div id="location-div">
-      <md-input-container style="width:100%;">
-        <input matInput formControlName="location" placeholder="Location" ng-required>
-      </md-input-container>
-    </div>
+  <div id="location-div">
+    <mat-form-field style="width: 85%">
+      <input matInput formControlName="location" placeholder="Location" ng-required>
+    </mat-form-field>
   </div>
 
   <!-- Respondee Name Input -->
-  <div>
-    <div id="respondee-name-div">
-      <md-input-container style="width:100%;">
-        <input mdInput formControlName="respondee_name" placeholder="Respondee Name" ng-required>
-      </md-input-container>
-    </div>
+  <div id="respondee-name-div" >
+    <mat-form-field style="width: 85%">
+      <input matInput formControlName="respondee_name" placeholder="Respondee Name" ng-required>
+    </mat-form-field>
   </div>
 
   <!-- Notes List -->
-  <div>
-    <md-input-container style="width:100%;">
-      <textarea mdInput rows="1" formControlName="notes" ng-required placeholder="Notes" style="width:100%;" resizeToFitContent></textarea>
-    </md-input-container>
+  <div id="notes-div">
+    <mat-form-field style="width: 85%">
+      <textarea matInput rows="1" formControlName="notes" ng-required placeholder="Notes" style="width:100%;"></textarea>
+    </mat-form-field>
   </div>
 </form>
 
 <!-- Footer -->
-<div fxFlex="100" fxLayoutAlign="center center">
-  <button md-button fxFlex="25" class="create-case-button" [disabled]="!caseForm.valid" (click)="onSubmit()">Create</button>
+<div>
+  <button mat-button class="create-case-button" [disabled]="!caseForm.valid" (click)="onSubmit(); reset()">Create</button>
 </div>

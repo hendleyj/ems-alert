@@ -5,11 +5,11 @@ import { CreateCaseComponent } from './case/create-case/create-case.component';
 
 
 const myRoutes: Routes = [
-  //Default
+  // Default
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  //Home Page
-  { path: 'home', component: CreateCaseComponent },  
+  // Home Page
+  { path: 'home', component: CreateCaseComponent },
 
 ];
 
