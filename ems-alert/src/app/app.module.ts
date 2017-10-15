@@ -1,20 +1,19 @@
-//Imports
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { MaterialModule, MdButtonModule, MdCardModule, MdSelectModule, MdAutocompleteModule, MdInputModule, MdCheckboxModule, MdMenuModule, MdSidenavModule, MdRadioModule, MdSlideToggleModule, MdDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatInputModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-// modules
+// Modules
 import { AppRoutingModule } from './app-routing.module';
 
-//declarations
+// declarations
 import { AppComponent } from './app.component';
 import { CreateCaseComponent } from './case/create-case/create-case.component';
 
-//providers
+// providers
 import { CaseService } from './case/case.service';
 
 @NgModule({
@@ -24,18 +23,19 @@ import { CaseService } from './case/case.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
     JsonpModule,
-    BrowserAnimationsModule,
-    MaterialModule
+    MatButtonModule,
+    MatInputModule,
+    FlexLayoutModule
   ],
   providers: [
     CaseService
   ],
-  bootstrap: [AppComponent],
-  schemas: [NO_ERRORS_SCHEMA]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

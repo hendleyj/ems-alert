@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ems-alert App', () => {
+describe('prac App', () => {
   let page: AppPage;
 
   beforeEach(() => {

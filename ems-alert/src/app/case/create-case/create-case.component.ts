@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterModule, Routes, Router, ActivatedRoute, Params } from '@angular/router';
 
-import { Case } from '../data-model';
+import { Case } from '../case';
 import { CaseService } from '../case.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { CaseService } from '../case.service';
 export class CreateCaseComponent {
     caseForm: FormGroup;
 
-    //Created case
+    // Created case
     createdCase: Case;
 
     constructor(private fb: FormBuilder, private caseService: CaseService, private router: Router) {
@@ -30,7 +30,12 @@ export class CreateCaseComponent {
     }
 
     public onSubmit(): void {
-        this.createdCase = new Case(0, this.caseService.getDate(), this.caseForm.get('location').value, this.caseForm.get('respondee_name').value, '', '', this.caseForm.get('notes').value);
+        this.createdCase = new Case(this.caseService.getDate(),
+            this.caseForm.get('location').value,
+            this.caseForm.get('respondee_name').value,
+            '',
+            '',
+            this.caseForm.get('notes').value);
 
         this.caseService.addCase(this.createdCase).subscribe(err => console.log(err));
 
