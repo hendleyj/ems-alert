@@ -10,7 +10,8 @@
 **Find both here: https://www.npmjs.com/get-npm
 
 - MongoDB (Community Edition)
-**View this guide to install for your machine: https://docs.mongodb.com/manual/installation/?_ga=2.130566217.796221208.1507635317-1072944379.1507635317#mongodb-community-edition
+**Instructions (choose your platform): https://docs.mongodb.com/manual/administration/install-community/
+**Installation file: https://www.mongodb.com/download-center?jmp=tutorials&_ga=2.78362772.127356062.1508092377-1747746535.1507838638#community
 
 
 ## Clone Git Repository
@@ -25,7 +26,6 @@ You can use the desktop app or the command line interface (altough the desktop a
 ```bash
 $ npm install
 ```
-
 
 ## Set up MongoDB
 1. Download/Install MongoDB
