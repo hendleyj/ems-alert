@@ -10,11 +10,14 @@ import { Case } from './case';
 export class CaseService {
     cases: Case[] = [];
 
+    headers = new Headers({ 'Content-Type': 'application/json'});
+    options = new RequestOptions({ headers: this.headers });
+
     constructor(private http: Http) { }
 
     // Update cases stored by service
     getCases(): Observable<Case[]> {
-        const response = this.http.get('http://localhost:4200/get/cases')
+        const response = this.http.get('http://37.48.113.142:4200/get/cases')
             .map((res: Response) => res.json())
             .catch(this.handleError);
 
@@ -33,11 +36,8 @@ export class CaseService {
         };
 
         if (this.findCaseById(data.id) == null) {
-            const headers = new Headers({ 'Content-Type': 'application/json' });
-            const options = new RequestOptions({ headers: headers });
-
             this.cases.push(new_case);
-            return this.http.post('http://localhost:4200/create/case', data, options);
+            return this.http.post('http://37.48.113.142:4200/create/case', data, this.options);
         }
     }
 

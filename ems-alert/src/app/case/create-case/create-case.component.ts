@@ -6,7 +6,7 @@ import { Case } from '../case';
 import { CaseService } from '../case.service';
 
 @Component({
-    selector: 'create-user',
+    selector: 'app-create-user',
     styleUrls: ['./create-case.component.scss'],
     templateUrl: './create-case.component.html'
 })
@@ -30,7 +30,7 @@ export class CreateCaseComponent {
     }
 
     public onSubmit(): void {
-        this.createdCase = new Case(0,
+        this.createdCase = new Case(this.caseService.cases.length - 1,
             this.caseService.getDate(),
             this.caseForm.get('location').value,
             this.caseForm.get('respondee_name').value,
