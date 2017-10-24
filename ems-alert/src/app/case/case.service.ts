@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+
 import { Case } from './case';
 
 @Injectable()
 export class CaseService {
     cases: Case[] = [];
 
-    headers = new Headers({ 'Content-Type': 'application/json'});
-    options = new RequestOptions({ headers: this.headers });
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private options = new RequestOptions({ headers: this.headers });
 
     constructor(private http: Http) { }
 
@@ -41,6 +43,18 @@ export class CaseService {
         }
     }
 
+    // getCasesLength(): any {
+    //     this.getCases().subscribe(
+    //         result => {
+    //             this.cases = result;
+    //             console.log(this.cases);
+    //         },
+    //         error => console.log('error'),
+    //         () => {
+    //             return this.cases.length;
+    //         }
+    //     );
+    // }
     // // Update a user in database
     // updateUser(oldName: String, user: User): Observable<User> {
     //     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -86,7 +100,6 @@ export class CaseService {
     }
 
     private handleError(error: Response | any) {
-        // In a real world app, you might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';

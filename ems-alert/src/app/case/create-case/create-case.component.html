@@ -1,25 +1,25 @@
 <!-- Header -->
-<h2>New Case</h2>
+<h2>Submit Alert</h2>
 
 <!-- Form -->
 <form [formGroup]="caseForm" novalidate>
   <!-- Location Input -->
   <div id="location-div">
-    <mat-form-field style="width: 85%">
+    <mat-form-field style="width: 100%">
       <input matInput formControlName="location" placeholder="Location" ng-required>
     </mat-form-field>
   </div>
 
   <!-- Respondee Name Input -->
   <div id="respondee-name-div" >
-    <mat-form-field style="width: 85%">
+    <mat-form-field style="width: 100%">
       <input matInput formControlName="respondee_name" placeholder="Respondee Name" ng-required>
     </mat-form-field>
   </div>
 
   <!-- Notes List -->
   <div id="notes-div">
-    <mat-form-field style="width: 85%">
+    <mat-form-field style="width: 100%">
       <textarea matInput rows="4" formControlName="notes" ng-required placeholder="Notes" style="width:100%;"></textarea>
     </mat-form-field>
   </div>
@@ -27,5 +27,5 @@
 
 <!-- Footer -->
 <div>
-  <button mat-button class="create-case-button" [disabled]="!caseForm.valid" (click)="onSubmit(); reset()">Create</button>
+  <button mat-button class="create-case-button" [disabled]="!caseForm.valid" (click)="onSubmit(); reset()">Alert</button>
 </div>

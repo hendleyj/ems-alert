@@ -18,7 +18,6 @@ export class CreateCaseComponent {
 
     constructor(private fb: FormBuilder, private caseService: CaseService, private router: Router) {
         this.createForm();
-        this.caseService.getCases();
     }
 
     public createForm(): void {
@@ -30,17 +29,25 @@ export class CreateCaseComponent {
     }
 
     public onSubmit(): void {
-        this.createdCase = new Case(this.caseService.cases.length - 1,
-            this.caseService.getDate(),
-            this.caseForm.get('location').value,
-            this.caseForm.get('respondee_name').value,
-            '',
-            '',
-            this.caseForm.get('notes').value);
+        let length = 0;
 
-        this.caseService.addCase(this.createdCase).subscribe(err => console.log(err));
-
-        // return this.userForm.get('fname').value + " " + this.userForm.get('lname').value;
+        // Get length for ID
+        this.caseService.getCases().subscribe(
+            result => {
+                length = result.length;
+                this.createdCase = new Case(length,
+                    this.caseService.getDate(),
+                    this.caseForm.get('location').value,
+                    this.caseForm.get('respondee_name').value,
+                    '',
+                    '',
+                    this.caseForm.get('notes').value);
+            },
+            error => console.log('error'),
+            () => {
+                this.caseService.addCase(this.createdCase).subscribe(err => console.log(err));
+            }
+        );
     }
 
     public reset(): void {
