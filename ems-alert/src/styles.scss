@@ -3,3 +3,12 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+.mat-card-header-text {
+    margin-left: 0px !important;
+}
+
+// Map styles
+#map {
+    height: 100%;
+  }

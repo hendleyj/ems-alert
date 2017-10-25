@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { RouterModule, Routes, Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Case } from '../case';
 import { CaseService } from '../case.service';
@@ -16,7 +15,7 @@ export class CreateCaseComponent {
     // Created case
     createdCase: Case;
 
-    constructor(private fb: FormBuilder, private caseService: CaseService, private router: Router) {
+    constructor(private fb: FormBuilder, private caseService: CaseService) {
         this.createForm();
     }
 
@@ -30,27 +29,33 @@ export class CreateCaseComponent {
 
     public onSubmit(): void {
         let length = 0;
+        this.createdCase = new Case(-1,
+            this.caseService.getDate(),
+            this.caseForm.get('location').value,
+            this.caseForm.get('respondee_name').value,
+            '',
+            '',
+            this.caseForm.get('notes').value);
 
         // Get length for ID
         this.caseService.getCases().subscribe(
             result => {
                 length = result.length;
-                this.createdCase = new Case(length,
-                    this.caseService.getDate(),
-                    this.caseForm.get('location').value,
-                    this.caseForm.get('respondee_name').value,
-                    '',
-                    '',
-                    this.caseForm.get('notes').value);
+                this.createdCase.id = length;
             },
             error => console.log('error'),
             () => {
-                this.caseService.addCase(this.createdCase).subscribe(err => console.log(err));
+                this.caseService.addCase(this.createdCase).subscribe(
+                    () => null,
+                    err => console.log(err),
+                    () => { window.location.reload(); }
+                );
             }
         );
     }
 
     public reset(): void {
         this.caseForm.reset();
+
     }
 }

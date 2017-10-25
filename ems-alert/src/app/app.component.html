@@ -1,8 +1,29 @@
+<!-- Application Title -->
 <div style="text-align:center">
-  <h1>Dispatcher</h1>
+  <div fxFlex="90">
+    <h1>Dispatcher</h1>
+  </div>
+  <div fxFlex="10" fxLayoutAlign="end center">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <i class="material-icons">more_vert</i>
+    </button>
+  </div>
 </div>
 
-<div class="class-content">
-    <app-create-user fxFlex="50"></app-create-user>
-    
+<!-- Menu -->
+<mat-menu #menu="matMenu">
+  <button mat-menu-item style="padding: 0px 8px 0px 8px !important;" fxLayoutAlign="start center">
+    <i class="material-icons" style="margin-right: 8px;">history</i>
+    <span>History</span>
+  </button>
+</mat-menu>
+
+<!-- Application Content -->
+<div class="class-content divider" fxLayout="row">
+  <app-create-user fxFlex="50" style="margin-right: 16px;"></app-create-user>
+  <!-- Something else -->
+</div>
+
+<div class="class-content" fxLayout="row">
+  <app-history fxFlex="100"></app-history>
 </div>
