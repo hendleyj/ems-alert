@@ -26,10 +26,11 @@ export class HistoryTableComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef; // Table filter element
 
-    constructor(private caseService: CaseService) {}
+    constructor(private caseService: CaseService) { }
 
     ngOnInit() {
-        this.dataSource = new CaseDataSource(this.caseDatabase); // Initialize data source
+        // Initialize data source
+        this.dataSource = new CaseDataSource(this.caseDatabase);
 
         // Action event for filtering table
         // Observable.fromEvent(this.filter.nativeElement, 'keyup')

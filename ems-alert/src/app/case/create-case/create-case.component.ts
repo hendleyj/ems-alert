@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Case } from '../case';
@@ -9,13 +9,15 @@ import { CaseService } from '../case.service';
     styleUrls: ['./create-case.component.scss'],
     templateUrl: './create-case.component.html'
 })
-export class CreateCaseComponent {
+export class CreateCaseComponent implements OnInit {
     caseForm: FormGroup;
 
     // Created case
     createdCase: Case;
 
-    constructor(private fb: FormBuilder, private caseService: CaseService) {
+    constructor(private fb: FormBuilder, private caseService: CaseService) {}
+
+    ngOnInit() {
         this.createForm();
     }
 
@@ -47,8 +49,8 @@ export class CreateCaseComponent {
             () => {
                 this.caseService.addCase(this.createdCase).subscribe(
                     () => null,
-                    err => console.log(err),
-                    () => { window.location.reload(); }
+                //     err => console.log(err),
+                //     () => { window.location.reload(); }
                 );
             }
         );

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
 
+import { CaseService } from './case/case.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,12 @@ import { MatMenuTrigger } from '@angular/material';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  history: boolean;
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor() { }
+  constructor(private caseService: CaseService) {
+    this.history = false;
+  }
 
 }
