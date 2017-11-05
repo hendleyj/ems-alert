@@ -10,11 +10,17 @@ import { CaseService } from './case/case.service';
 })
 export class AppComponent {
   history: boolean;
+  login: boolean;
+  registered: boolean;
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   constructor(private caseService: CaseService) {
     this.history = false;
+    this.login = false;
   }
 
+  registerEvent(registered: boolean) {
+    this.registered = registered;
+  }
 }

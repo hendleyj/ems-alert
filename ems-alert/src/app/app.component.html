@@ -1,33 +1,43 @@
-<!-- Application Title -->
-<div style="text-align:center">
-  <div fxFlex="90">
-    <h1>Dispatcher</h1>
+<!-- Login Page -->
+<div *ngIf="!login" fxLayoutAlign="center center">
+  <app-dispatcher-login fxFlex="60" *ngIf="!registered" (dispatcherLoginEvent)="registerEvent($event)"></app-dispatcher-login>
+  <app-dispatcher-register *ngIf="registered" fxFlex="70" (dispatcherRegisterEvent)="registerEvent($event)"></app-dispatcher-register>
+</div>
+
+
+<!-- Content -->
+<div *ngIf="login">
+  <!-- Application Title -->
+  <div style="text-align:center">
+    <div fxFlex="90">
+      <h1>Dispatcher</h1>
+    </div>
+    <div fxFlex="10" fxLayoutAlign="end center">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <i class="material-icons">more_vert</i>
+      </button>
+    </div>
   </div>
-  <div fxFlex="10" fxLayoutAlign="end center">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <i class="material-icons">more_vert</i>
+
+  <!-- Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngIf="!history" style="padding: 0px 8px 0px 8px !important;" fxLayoutAlign="start center" (click)="history = true;">
+      <i class="material-icons" style="margin-right: 8px;">history</i>
+      <span>Open History</span>
     </button>
+    <button mat-menu-item *ngIf="history" style="padding: 0px 8px 0px 8px !important;" fxLayoutAlign="start center" (click)="history = false;">
+      <i class="material-icons" style="margin-right: 8px;">history</i>
+      <span>Close History</span>
+    </button>
+  </mat-menu>
+
+  <!-- Application Content -->
+  <div class="class-content divider" fxLayout="row">
+    <app-create-user fxFlex="50" style="margin-right: 16px;"></app-create-user>
+    <!-- Something else -->
   </div>
-</div>
 
-<!-- Menu -->
-<mat-menu #menu="matMenu" >
-  <button mat-menu-item *ngIf="!history" style="padding: 0px 8px 0px 8px !important;" fxLayoutAlign="start center" (click)="history = true;">
-    <i class="material-icons" style="margin-right: 8px;">history</i>
-    <span>Open History</span>
-  </button>
-  <button mat-menu-item *ngIf="history" style="padding: 0px 8px 0px 8px !important;" fxLayoutAlign="start center" (click)="history = false;">
-    <i class="material-icons" style="margin-right: 8px;">history</i>
-    <span>Close History</span>
-  </button>
-</mat-menu>
-
-<!-- Application Content -->
-<div class="class-content divider" fxLayout="row">
-  <app-create-user fxFlex="50" style="margin-right: 16px;"></app-create-user>
-  <!-- Something else -->
-</div>
-
-<div class="class-content" *ngIf="history" fxLayout="row">
-  <app-history fxFlex="100"></app-history>
+  <div class="class-content" *ngIf="history" fxLayout="row">
+    <app-history fxFlex="100"></app-history>
+  </div>
 </div>
