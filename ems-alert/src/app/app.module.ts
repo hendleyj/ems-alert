@@ -11,15 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 // declarations
 import { AppComponent } from './app.component';
-import { DispatcherLoginComponent } from './login/login.component';
-import { DispatcherRegisterComponent } from './login/register/register.component';
+import { DispatcherLoginComponent } from './dispatcher-login/login/login.component';
+import { DispatcherRegisterComponent } from './dispatcher-login/register/register.component';
 import { CreateCaseComponent } from './case/create-case/create-case.component';
 import { CaseHistoryComponent } from './history/history.component';
 import { HistoryTableComponent } from './history/history-table/history-table.component';
+import { MainDashboardComponent } from './dashboard/dashboard.component';
 
 // providers
 import { CaseService } from './case/case.service';
-import { LoginService } from './login/login.service';
+import { LoginService } from './dispatcher-login/login.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginService } from './login/login.service';
     DispatcherRegisterComponent,
     CreateCaseComponent,
     CaseHistoryComponent,
-    HistoryTableComponent
+    HistoryTableComponent,
+    MainDashboardComponent
   ],
   imports: [
     BrowserModule,

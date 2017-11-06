@@ -47,11 +47,7 @@ export class CreateCaseComponent implements OnInit {
             },
             error => console.log('error'),
             () => {
-                this.caseService.addCase(this.createdCase).subscribe(
-                    () => null,
-                //     err => console.log(err),
-                //     () => { window.location.reload(); }
-                );
+                this.caseService.addCase(this.createdCase).subscribe();
             }
         );
     }

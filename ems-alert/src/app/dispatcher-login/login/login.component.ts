@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dispatcher-login',
@@ -10,7 +11,7 @@ export class DispatcherLoginComponent implements OnInit {
     loginForm: FormGroup;
     @Output() dispatcherLoginEvent = new EventEmitter<boolean>();
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private router: Router) { }
 
     ngOnInit() {
         this.createForm();
@@ -25,13 +26,15 @@ export class DispatcherLoginComponent implements OnInit {
 
     public onSubmit(): void {
 
+
+        this.router.navigate(['/dash']);
     }
 
     public reset(): void {
         this.loginForm.reset();
     }
 
-    public register(flag: boolean) {
-        this.dispatcherLoginEvent.emit(flag);
+    public register() {
+        this.router.navigate(['/register']);
     }
 }

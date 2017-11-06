@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CreateCaseComponent } from './case/create-case/create-case.component';
-import { DispatcherRegisterComponent } from './login/register/register.component';
+import { MainDashboardComponent } from './dashboard/dashboard.component';
+import { DispatcherRegisterComponent } from './dispatcher-login/register/register.component';
+import { DispatcherLoginComponent } from './dispatcher-login/login/login.component';
 
 const myRoutes: Routes = [
   // Default
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  // Login Page
+  { path: 'login', component: DispatcherLoginComponent },
 
   // Home Page
-  { path: 'home', component: CreateCaseComponent },
+  { path: 'dash', component: MainDashboardComponent },
 
   // Registration Page
-  { path: 'register', component: DispatcherRegisterComponent}
+  { path: 'register', component: DispatcherRegisterComponent }
 
 ];
 

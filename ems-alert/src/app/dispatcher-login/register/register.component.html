@@ -1,0 +1,53 @@
+<div fxLayoutAlign="center start">
+    <mat-card fxFlex="70">
+        <!-- Header -->
+        <mat-card-header>
+            <mat-card-title>
+                <h2>Create Account</h2>
+            </mat-card-title>
+        </mat-card-header>
+
+        <!-- Register Form -->
+        <mat-card-content>
+            <form [formGroup]="registerForm" novalidate>
+                <!-- Name Input -->
+                <div id="name-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput formControlName="name" placeholder="Name" ng-required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Username Input -->
+                <div id="username-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput formControlName="username" placeholder="Username" ng-required>
+                    </mat-form-field>
+                </div>
+
+                <!-- Password Input -->
+                <div id="pw-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput formControlName="password" ng-required placeholder="Password" style="width:100%;">
+                    </mat-form-field>
+                </div>
+
+                <!-- Password Match Input -->
+                <div id="pw-match-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput formControlName="password_match" ng-required placeholder="Re-type Password" style="width:100%;">
+                    </mat-form-field>
+                </div>
+
+                <!-- Terms Input -->
+                <div id="terms-div">
+                    <mat-checkbox formControlName="terms">I accept Terms & Conditions</mat-checkbox>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div fxLayoutAlign="center center">
+                <button mat-button class="create-dispatcher-button" [disabled]="!registerForm.valid" (click)="onSubmit(); reset(); registered(false)">Create</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

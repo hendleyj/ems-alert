@@ -17,17 +17,7 @@ export class CaseService {
 
     constructor(private http: Http) { }
 
-    // Update cases stored by service
-    getCases(): Observable<Case[]> {
-        const response = this.http.get('http://37.48.113.142:4200/get/cases')
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
-
-        response.subscribe(res => this.cases = res);
-        return response;
-    }
-
-    // Add user to database
+    // Add case to database
     addCase(new_case: Case): Observable<Response> {
         const data = {
             id: new_case.id,
@@ -43,34 +33,36 @@ export class CaseService {
         }
     }
 
-    // getCasesLength(): any {
-    //     this.getCases().subscribe(
-    //         result => {
-    //             this.cases = result;
-    //             console.log(this.cases);
-    //         },
-    //         error => console.log('error'),
-    //         () => {
-    //             return this.cases.length;
-    //         }
-    //     );
-    // }
-    // // Update a user in database
-    // updateUser(oldName: String, user: User): Observable<User> {
+    // Update cases stored by service
+    getCases(): Observable<Case[]> {
+        const response = this.http.get('http://37.48.113.142:4200/get/cases')
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+
+        response.subscribe(res => this.cases = res);
+        return response;
+    }
+
+    // // Update a case in database
+    // updateCase(oldName: String, case: Case): Observable<Case> {
     //     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     //     var options = new RequestOptions({ headers: headers });
 
-    //     return this.http.put('http://localhost:3000/update/users/' + oldName, user, options)
+    //     return this.http.put('http://localhost:3000/update/cases/' + oldName, case, options)
     //         .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
     //         .catch(this.handleError);
     // }
 
-    // // Delete a user from database
-    // delete(user: User): void {
-    //     this.http.delete('http://localhost:3000/delete/users/' + user.name)
+    // // Delete a case from database
+    // delete(case: Case): void {
+    //     this.http.delete('http://localhost:3000/delete/cases/' + case.name)
     //         .catch(this.handleError)
-    //         .subscribe((res: any) => this.users.splice(this.users.indexOf(user), 1));
+    //         .subscribe((res: any) => this.cases.splice(this.cases.indexOf(case), 1));
     // }
+
+    ////////////////////////
+    // Helper Funcitons
+    ////////////////////////
 
     // Find case in array
     findCaseById(id: number): Case {

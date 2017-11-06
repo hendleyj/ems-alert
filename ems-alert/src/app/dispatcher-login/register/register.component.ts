@@ -23,24 +23,20 @@ export class DispatcherRegisterComponent implements OnInit {
         this.registerForm = this.fb.group({
             name: ['', Validators.required],
             username: ['', Validators.required],
-
-            passwords: this.fb.group({
-                password: ['', Validators.required],
-                password_match: ['', Validators.required]
-            }, { validator: this.areEqual })
+            password: ['', Validators.required],
+            password_match: ['', Validators.required],
+            terms: ['', Validators.required]
         });
     }
 
     public onSubmit(): void {
-        this.loginService.registerDispatcher(this.registerForm.get('username').value, this.registerForm.get('password_match').value);
+        if (this.areEqual()) {
+            this.loginService.register(this.registerForm.get('username').value, this.registerForm.get('password').value).subscribe();
+        }
     }
 
     public reset(): void {
         this.registerForm.reset();
-    }
-
-    public registered(flag: boolean) {
-        this.dispatcherRegisterEvent.emit(flag);
     }
 
     private areEqual(): boolean {

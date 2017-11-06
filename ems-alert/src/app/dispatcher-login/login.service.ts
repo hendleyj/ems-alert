@@ -15,15 +15,13 @@ export class LoginService {
 
     constructor(private http: Http) { }
 
-    registerDispatcher(username: string, password: string): Observable<Response> {
+    register(username: string, password: string): Observable<Response> {
         const data = {
             username: username,
             password: password
         };
 
-        return this.http.post('http://37.48.113.142:4200/dispatcher/register', data, this.options)
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
+        return this.http.post('http://37.48.113.142:4200/dispatcher/register', data, this.options);
     }
 
     //////////////////////////
