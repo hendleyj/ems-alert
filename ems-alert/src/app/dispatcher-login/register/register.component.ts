@@ -42,7 +42,7 @@ export class DispatcherRegisterComponent implements OnInit {
                     response => res = response,
                     error => console.log(error),
                     () => {
-                        if (res === 'true') {
+                        if (res._body === '"true"') {
                             this.isExistingUser = true;
                         } else {
                             this.router.navigate(['/login']);
