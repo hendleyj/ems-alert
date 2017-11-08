@@ -31,6 +31,9 @@
             <div fxLayoutAlign="center center">
                 <a (click)="register()">New User?</a>
             </div>
+
+            <div *ngIf="passwordWrong" class="error" fxLayoutAlign="center start" style="margin-top: 8px;">The password was entered incorrectly.</div>
+            <div *ngIf="usernameWrong" class="error" fxLayoutAlign="center start" style="margin-top: 8px;">The username was entered incorrectly.</div>
         </mat-card-content>
     </mat-card>
 </div>

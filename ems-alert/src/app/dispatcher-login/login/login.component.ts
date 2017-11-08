@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { LoginService } from '../login.service';
+
 @Component({
     selector: 'app-dispatcher-login',
     styleUrls: ['./login.component.scss'],
@@ -10,11 +12,15 @@ import { Router } from '@angular/router';
 export class DispatcherLoginComponent implements OnInit {
     loginForm: FormGroup;
     @Output() dispatcherLoginEvent = new EventEmitter<boolean>();
+    passwordWrong: boolean;
+    usernameWrong: boolean;
 
-    constructor(private fb: FormBuilder, private router: Router) { }
+    constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
     ngOnInit() {
         this.createForm();
+        this.passwordWrong = false;
+        this.usernameWrong = false;
     }
 
     public createForm(): void {
@@ -25,9 +31,25 @@ export class DispatcherLoginComponent implements OnInit {
     }
 
     public onSubmit(): void {
+        let res;
 
-
-        this.router.navigate(['/dash']);
+        this.loginService.processUserInfo(this.loginForm.get('username').value,
+            this.loginForm.get('password').value, true)
+            .subscribe(
+                response => res = response,
+                error => console.log(error),
+                () => {
+                    if (res._body === '"password wrong"') {
+                        this.passwordWrong = true;
+                        this.usernameWrong = false;
+                    } else if (res._body === '"username wrong"') {
+                        this.usernameWrong = true;
+                        this.passwordWrong = false;
+                    } else {
+                        this.router.navigate(['/dash']);
+                    }
+                }
+        );
     }
 
     public reset(): void {
