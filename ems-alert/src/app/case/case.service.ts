@@ -47,23 +47,19 @@ export class CaseService {
     // updateCase(oldName: String, case: Case): Observable<Case> {
     //     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     //     var options = new RequestOptions({ headers: headers });
-
     //     return this.http.put('http://localhost:3000/update/cases/' + oldName, case, options)
     //         .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
     //         .catch(this.handleError);
     // }
-
     // // Delete a case from database
     // delete(case: Case): void {
     //     this.http.delete('http://localhost:3000/delete/cases/' + case.name)
     //         .catch(this.handleError)
     //         .subscribe((res: any) => this.cases.splice(this.cases.indexOf(case), 1));
     // }
-
     ////////////////////////
     // Helper Funcitons
     ////////////////////////
-
     // Find case in array
     findCaseById(id: number): Case {
         for (let i = 0; i < this.cases.length; i++) {

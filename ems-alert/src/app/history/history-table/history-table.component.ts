@@ -25,7 +25,6 @@ export class HistoryTableComponent implements OnInit {
     dataSource: CaseDataSource | null;
 
     @ViewChild('filter') filter: ElementRef; // Table filter element
-
     constructor(private caseService: CaseService) { }
 
     ngOnInit() {

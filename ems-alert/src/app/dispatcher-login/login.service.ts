@@ -15,19 +15,25 @@ export class LoginService {
 
     constructor(private http: Http) { }
 
-    register(username: string, password: string): Observable<Response> {
+    processUserInfo(username: string, password: string, login: boolean): Observable<Response> {
+        let route;
         const data = {
             username: username,
             password: password
         };
 
-        return this.http.post('http://37.48.113.142:4200/dispatcher/register', data, this.options);
+        if (login) {
+            route = 'login';
+        } else {
+            route = 'register';
+        }
+
+        return this.http.post('http://37.48.113.142:4200/dispatcher/' + route, data, this.options);
     }
 
     //////////////////////////
     // Helper methods
     //////////////////////////
-
     private handleError(error: Response | any) {
         let errMsg: string;
         if (error instanceof Response) {
