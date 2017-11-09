@@ -28,7 +28,9 @@ export class LoginService {
             route = 'register';
         }
 
-        return this.http.post('http://37.48.113.142:4200/dispatcher/' + route, data, this.options);
+        return this.http.post('http://37.48.113.142:4200/dispatcher/' + route, data, this.options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
     }
 
     //////////////////////////

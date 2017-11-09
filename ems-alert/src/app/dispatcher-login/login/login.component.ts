@@ -36,19 +36,19 @@ export class DispatcherLoginComponent implements OnInit {
         this.loginService.processUserInfo(this.loginForm.get('username').value,
             this.loginForm.get('password').value, true)
             .subscribe(
-                response => res = response,
-                error => console.log(error),
-                () => {
-                    if (res._body === '"password wrong"') {
+                response => {
+                    res = response;
+                    if (res === 'password wrong') {
                         this.passwordWrong = true;
                         this.usernameWrong = false;
-                    } else if (res._body === '"username wrong"') {
+                    } else if (res === 'username wrong') {
                         this.usernameWrong = true;
                         this.passwordWrong = false;
                     } else {
                         this.router.navigate(['/dash']);
                     }
-                }
+                },
+                error => console.log(error)
         );
     }
 

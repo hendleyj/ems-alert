@@ -39,10 +39,12 @@ export class DispatcherRegisterComponent implements OnInit {
             this.loginService.processUserInfo(this.registerForm.get('username').value,
                 this.registerForm.get('password').value, false)
                 .subscribe(
-                    response => res = response,
+                    response => {
+                        res = response;
+                    },
                     error => console.log(error),
                     () => {
-                        if (res._body === '"true"') {
+                        if (res === 'true') {
                             this.isExistingUser = true;
                         } else {
                             this.router.navigate(['/login']);
@@ -52,8 +54,8 @@ export class DispatcherRegisterComponent implements OnInit {
         }
     }
 
-    public reset(): void {
-        this.registerForm.reset();
+    private goBack() {
+        this.router.navigate(['/login']);
     }
 
     private areEqual(): boolean {
