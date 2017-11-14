@@ -4,6 +4,7 @@ var Responder = new mongoose.Schema({
     username: String,
     name: String,
     certification_number: Number,
+    certification_date: String,
     location: String
 });
 
