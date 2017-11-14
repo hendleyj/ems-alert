@@ -47,7 +47,7 @@ export class CreateCaseComponent implements OnInit {
         // this.caseService.getAllResponders().subscribe(res => responders = res);
 
         // Send Alert
-        this.caseService.sendAlert(this.createdCase.location);
+        this.caseService.sendAlert();
 
         // Get length for ID
         this.caseService.getCases().subscribe(

@@ -6,6 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatInputModule, MatTableModule, MatCardModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+// Firebase
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,6 +25,7 @@ import { MainDashboardComponent } from './dashboard/dashboard.component';
 // providers
 import { CaseService } from './case/case.service';
 import { LoginService } from './dispatcher-login/login.service';
+import { enableDebugTools } from '@angular/platform-browser/src/browser/tools/tools';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,7 @@ import { LoginService } from './dispatcher-login/login.service';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
