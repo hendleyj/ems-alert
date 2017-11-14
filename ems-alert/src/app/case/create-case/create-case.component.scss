@@ -1,0 +1,16 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+button:disabled {
+    background-color: lightgray;
+}
+
+button:enabled {
+    background-color: lightblue;
+}
+
+h2 { 
+    margin: 0;
+}
+
