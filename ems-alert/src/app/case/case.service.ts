@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Case } from './case';
+import { Responder } from './responder';
 
 @Injectable()
 export class CaseService {
@@ -43,27 +44,43 @@ export class CaseService {
         return response;
     }
 
-    // // Update a case in database
-    // updateCase(oldName: String, case: Case): Observable<Case> {
-    //     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-    //     var options = new RequestOptions({ headers: headers });
+    // Send Alert
+    sendAlert(location: string): void {
+        // Emergency location
+        const _location = '1900 N Prospect Ave, Milwaukee, WI 53202';
 
-    //     return this.http.put('http://localhost:3000/update/cases/' + oldName, case, options)
-    //         .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-    //         .catch(this.handleError);
-    // }
+        const myParams = new URLSearchParams();
+        myParams.append('address', _location);
+        const options = new RequestOptions({ headers: this.headers, params: myParams });
 
-    // // Delete a case from database
-    // delete(case: Case): void {
-    //     this.http.delete('http://localhost:3000/delete/cases/' + case.name)
-    //         .catch(this.handleError)
-    //         .subscribe((res: any) => this.cases.splice(this.cases.indexOf(case), 1));
-    // }
+        let geocode;
+
+        // Geocode emergency address
+        this.http.get('http://37.48.113.142:4200/map-api/geocode-one', options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError)
+            .subscribe(
+                res => geocode = res,
+                err => console.log(err),
+                () => {
+                    console.log(geocode);
+                }
+            );
+
+        // return this.http.post('http://37.48.113.142:4200/map-api/', data, this.options)
+        //     .map((res: Response) => res.json())
+        //     .catch(this.handleError);
+    }
+
+    getAllResponders(): Observable<Responder[]> {
+        return this.http.get('http://37.48.113.142:4200/get/responders', this.options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
 
     ////////////////////////
     // Helper Funcitons
     ////////////////////////
-
     // Find case in array
     findCaseById(id: number): Case {
         for (let i = 0; i < this.cases.length; i++) {

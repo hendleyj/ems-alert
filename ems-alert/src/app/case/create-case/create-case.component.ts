@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Case } from '../case';
 import { CaseService } from '../case.service';
 
+import { Responder } from '../responder';
+
 @Component({
     selector: 'app-create-user',
     styleUrls: ['./create-case.component.scss'],
@@ -39,6 +41,14 @@ export class CreateCaseComponent implements OnInit {
             '',
             this.caseForm.get('notes').value);
 
+        // let responders: Responder[];
+
+        // // Get Responder Locations
+        // this.caseService.getAllResponders().subscribe(res => responders = res);
+
+        // Send Alert
+        this.caseService.sendAlert(this.createdCase.location);
+
         // Get length for ID
         this.caseService.getCases().subscribe(
             result => {
@@ -47,6 +57,7 @@ export class CreateCaseComponent implements OnInit {
             },
             error => console.log('error'),
             () => {
+                // Add case to database
                 this.caseService.addCase(this.createdCase).subscribe();
             }
         );

@@ -7,7 +7,7 @@ import { DispatcherLoginComponent } from './dispatcher-login/login/login.compone
 
 const myRoutes: Routes = [
   // Default
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dash', pathMatch: 'full' },
 
   // Login Page
   { path: 'login', component: DispatcherLoginComponent },
