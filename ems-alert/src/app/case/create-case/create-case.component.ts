@@ -41,13 +41,13 @@ export class CreateCaseComponent implements OnInit {
             '',
             this.caseForm.get('notes').value);
 
-        // let responders: Responder[];
+         let responders: Responder[];
 
-        // // Get Responder Locations
-        // this.caseService.getAllResponders().subscribe(res => responders = res);
+         // Get Responder Locations
+         this.caseService.getAllResponders().subscribe(res => responders = res);
 
-        // Send Alert
-        // this.caseService.sendAlert();
+         // Send Alert
+         this.caseService.sendAlert(responders);
 
         // Get length for ID
         this.caseService.getCases().subscribe(

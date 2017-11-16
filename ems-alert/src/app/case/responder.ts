@@ -1,7 +1,9 @@
 export class Responder {
     username: string;
+    device_id: string;
     name: string;
     certification_number: number;
+    certification_date: string;
     location: string;
 
     constructor(
