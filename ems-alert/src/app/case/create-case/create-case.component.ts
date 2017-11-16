@@ -47,7 +47,7 @@ export class CreateCaseComponent implements OnInit {
         // this.caseService.getAllResponders().subscribe(res => responders = res);
 
         // Send Alert
-        this.caseService.sendAlert();
+        // this.caseService.sendAlert();
 
         // Get length for ID
         this.caseService.getCases().subscribe(
@@ -65,6 +65,5 @@ export class CreateCaseComponent implements OnInit {
 
     public reset(): void {
         this.caseForm.reset();
-
     }
 }

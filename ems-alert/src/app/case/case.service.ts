@@ -55,7 +55,6 @@ export class CaseService {
 
         // let geocode;
 
-        // Geocode emergency address
         this.http.post('http://37.48.113.142:4200/responder/send', this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError)
