@@ -43,11 +43,11 @@ export class CreateCaseComponent implements OnInit {
 
         // let responders: Responder[];
 
-        // // Get Responder Locations
+        // // Get all responders
         // this.caseService.getAllResponders().subscribe(res => responders = res);
 
         // Send Alert
-        // this.caseService.sendAlert();
+        this.caseService.sendAlert();
 
         // Get length for ID
         this.caseService.getCases().subscribe(

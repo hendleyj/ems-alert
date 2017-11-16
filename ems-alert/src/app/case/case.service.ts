@@ -49,22 +49,10 @@ export class CaseService {
         // Emergency location
         const _location = '1900 N Prospect Ave, Milwaukee, WI 53202';
 
-        // const myParams = new URLSearchParams();
-        // myParams.append('address', _location);
-        // const options = new RequestOptions({ headers: this.headers, params: myParams });
-
-        // let geocode;
-
         this.http.post('http://37.48.113.142:4200/responder/send', this.options)
             .map((res: Response) => res.json())
             .catch(this.handleError)
-            .subscribe(
-                // res => geocode = res,
-                // err => console.log(err),
-                // () => {
-                //     console.log(geocode);
-                // }
-            );
+            .subscribe();
 
         // return this.http.post('http://37.48.113.142:4200/map-api/', data, this.options)
         //     .map((res: Response) => res.json())
