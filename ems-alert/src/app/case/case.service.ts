@@ -59,6 +59,20 @@ export class CaseService {
             .catch(this.handleError);
     }
 
+    geocode(address: string): Observable<any> {
+        // const params = new URLSearchParams();
+        // params.set('address', address);
+        // const options = new RequestOptions({ headers: this.headers, params: params });
+
+        const body = {
+            address: address
+        };
+
+        return this.http.post('http://37.48.113.142:4200/map-api/geocode', body, this.options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
     ////////////////////////
     // Helper Funcitons
     ////////////////////////
