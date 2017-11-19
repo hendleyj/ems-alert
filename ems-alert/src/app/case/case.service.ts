@@ -19,7 +19,7 @@ export class CaseService {
     constructor(private http: Http) { }
 
     // Add case to database
-    addCase(new_case: Case): Observable<Response> {
+    addCase(new_case: Case, lat: any, long: any): Observable<Response> {
         const data = {
             id: new_case.id,
             date: new_case.date,
@@ -60,18 +60,13 @@ export class CaseService {
     }
 
     geocode(address: string): Observable<any> {
-        // const params = new URLSearchParams();
-        // params.set('address', address);
-        // const options = new RequestOptions({ headers: this.headers, params: params });
+        address += ', USA';
 
-        const body = {
-            address: address
-        };
-
-        return this.http.post('http://37.48.113.142:4200/map-api/geocode', body, this.options)
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
-    }
+        return this.http.get('https://maps.google.com/maps/api/geocode/json?address=' + address +
+        'CA&key=AIzaSyAaZ63M-YwZTiTlxRqSL9wOacDnaoL6B9k')
+             .map((res: Response) => res.json())
+             .catch(this.handleError);
+     }
 
     ////////////////////////
     // Helper Funcitons

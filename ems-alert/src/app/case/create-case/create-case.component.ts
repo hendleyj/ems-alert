@@ -17,7 +17,7 @@ export class CreateCaseComponent implements OnInit {
     // Created case
     createdCase: Case;
 
-    constructor(private fb: FormBuilder, private caseService: CaseService) {}
+    constructor(private fb: FormBuilder, private caseService: CaseService) { }
 
     ngOnInit() {
         this.createForm();
@@ -44,49 +44,56 @@ export class CreateCaseComponent implements OnInit {
 
         let responders: Responder[];
         const deviceIds: string[] = [];
-        let geocoded_address: any;
-        const latitude = '43.078263';
-        const longitude = '-87.881969';
+        let latitude;
+        let longitude;
 
         // Get Responder Locations
         this.caseService.getAllResponders().subscribe(
-             res => responders = res,
-             err => console.log('error getting responders'),
-             () => {
+            res => responders = res,
+            err => console.log('error getting responders'),
+            () => {
                 // Geocode case location
-                // this.caseService.geocode(this.createdCase.location).subscribe(res => geocoded_address = res);
+                this.caseService.geocode(this.createdCase.location).subscribe(
+                    res => {
+                        latitude = res.results[0].geometry.location.lat;
+                        longitude = res.results[0].geometry.location.lng;
+                    },
+                    err => { },
+                    () => {
+                        // Send Alert
+                        this.caseService.sendAlert(
+                            {
+                                latitude: latitude,
+                                longitude: longitude,
+                                respondee: this.createdCase.respondee_name,
+                                notes: this.createdCase.notes,
+                                responders: deviceIds
+                            }
+                        );
+
+                        // Get length for ID
+                        this.caseService.getCases().subscribe(
+                            result => {
+                                length = result.length;
+                                this.createdCase.id = length;
+                            },
+                            error => console.log('error'),
+                            () => {
+                                // Add case to database
+                                this.caseService.addCase(this.createdCase, latitude, longitude).subscribe();
+                            }
+                        );
+                    }
+                );
 
                 // Compile device ids into an array
                 responders.forEach(element => {
                     deviceIds.push(element.device_id);
                 });
-
-                // Send Alert
-                this.caseService.sendAlert(
-                    {
-                        // latitude : latitude,
-                        // longitude : longitude,
-                        location : this.createdCase.location,
-                        respondee : this.createdCase.respondee_name,
-                        notes : this.createdCase.notes,
-                        responders : deviceIds
-                    }
-                );
-             }
+            }
         );
 
-        // Get length for ID
-        // this.caseService.getCases().subscribe(
-        //     result => {
-        //         length = result.length;
-        //         this.createdCase.id = length;
-        //     },
-        //     error => console.log('error'),
-        //     () => {
-        //         // Add case to database
-        //         this.caseService.addCase(this.createdCase).subscribe();
-        //     }
-        // );
+
     }
 
     public reset(): void {
