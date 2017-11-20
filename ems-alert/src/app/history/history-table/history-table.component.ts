@@ -47,6 +47,7 @@ export class HistoryTableComponent implements OnInit {
 export class CaseDatabase {
     dataChange: BehaviorSubject<Case[]> = new BehaviorSubject<Case[]>([]);
     index = 0; // Global index
+    date = this.caseService.getDate();
     get data(): Case[] { return this.dataChange.value; }
 
     constructor(private caseService: CaseService) {
@@ -54,7 +55,9 @@ export class CaseDatabase {
         this.caseService.getCases().subscribe(
             result => {
                 for (; this.index < this.caseService.cases.length; this.index++) {
-                    this.addCase();
+                    if (this.caseService.cases[this.index].date === this.date) {
+                        this.addCase();
+                    }
                 }
             }
         );
