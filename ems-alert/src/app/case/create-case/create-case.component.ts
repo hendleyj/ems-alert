@@ -47,7 +47,7 @@ export class CreateCaseComponent implements OnInit {
         let latitude;
         let longitude;
 
-        // Get Responder Locations
+        // Get Responder LocationPs
         this.caseService.getAllResponders().subscribe(
             res => responders = res,
             err => console.log('error getting responders'),
@@ -61,10 +61,12 @@ export class CreateCaseComponent implements OnInit {
                     err => { },
                     () => {
                         // Send Alert
+                        console.log(latitude);
+                        console.log(longitude);
                         this.caseService.sendAlert(
                             {
-                                latitude: latitude,
-                                longitude: longitude,
+                                latitude: latitude + '',
+                                longitude: longitude + '',
                                 respondee: this.createdCase.respondee_name,
                                 notes: this.createdCase.notes,
                                 responders: deviceIds
