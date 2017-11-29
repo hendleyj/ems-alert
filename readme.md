@@ -10,7 +10,7 @@
 Remember the location on your computer where you clone the repository.
 
 
-## 3. Install Dependencies with NM
+## 3. Install Dependencies with NPM
 1. Open a command prompt (Windows) or terminal (Mac) and go to the repository directory (make sure you point it to the "root" of the project, which is where the package.json file is).
 2. Have npm install all the dependencies:
 ```bash
