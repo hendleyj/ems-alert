@@ -24,8 +24,10 @@ export class CaseService {
             id: new_case.id,
             date: new_case.date,
             location: new_case.location,
-            respondee_name: new_case.respondee_name,
-            notes: new_case.notes
+            patient_name: new_case.patient_name,
+            respondee: new_case.respondee_name,
+            notes: new_case.notes,
+            respondee_notes: new_case.respondee_notes
         };
 
         if (this.findCaseById(data.id) == null) {

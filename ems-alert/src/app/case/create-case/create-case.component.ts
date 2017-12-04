@@ -39,7 +39,8 @@ export class CreateCaseComponent implements OnInit {
             this.caseForm.get('respondee_name').value,
             '',
             '',
-            this.caseForm.get('notes').value);
+            this.caseForm.get('notes').value,
+            '');
 
 
         let responders: Responder[];
@@ -60,20 +61,7 @@ export class CreateCaseComponent implements OnInit {
                     },
                     err => { },
                     () => {
-                        // Send Alert
-                        console.log(latitude);
-                        console.log(longitude);
-                        this.caseService.sendAlert(
-                            {
-                                latitude: latitude + '',
-                                longitude: longitude + '',
-                                respondee: this.createdCase.respondee_name,
-                                notes: this.createdCase.notes,
-                                responders: deviceIds
-                            }
-                        );
 
-                        // Get length for ID
                         this.caseService.getCases().subscribe(
                             result => {
                                 length = result.length;
@@ -82,7 +70,24 @@ export class CreateCaseComponent implements OnInit {
                             error => console.log('error'),
                             () => {
                                 // Add case to database
-                                this.caseService.addCase(this.createdCase, latitude, longitude).subscribe();
+                                this.caseService.addCase(this.createdCase, latitude, longitude).subscribe(
+                                    () => {
+                                        // Send Alert
+                                        // console.log(latitude);
+                                        // console.log(longitude);
+                                        // console.log(this.createdCase);
+                                        this.caseService.sendAlert(
+                                            {
+                                                caseid: this.createdCase.id + '',
+                                                latitude: latitude + '',
+                                                longitude: longitude + '',
+                                                patient: this.createdCase.patient_name,
+                                                notes: this.createdCase.notes,
+                                                responders: deviceIds
+                                            }
+                                        );
+                                    }
+                                );
                             }
                         );
                     }
