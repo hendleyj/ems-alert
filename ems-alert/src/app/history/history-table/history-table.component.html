@@ -17,17 +17,68 @@
 
         <!-- Respondee Name Column -->
         <ng-container matColumnDef="respondeeName">
-            <mat-header-cell *matHeaderCellDef> Respondee Name </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.respondee_name}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Patient Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.patient_name}} </mat-cell>
         </ng-container>
 
         <!-- Location Column -->
         <ng-container matColumnDef="location">
             <mat-header-cell *matHeaderCellDef> Location </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
+            <mat-cell *matCellDef="let row">
+                {{row.location}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- Notes Column -->
+        <ng-container matColumnDef="notes">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let row" fxLayoutAlign="end center">
+                <div class="click" data-toggle="modal" data-target="#myModal" (click)="setSource(row)">
+                    <button mat-button style="border: 1pt solid gray;">Notes</button>
+                </div>
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h2>Update Case</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <!-- Address Input -->
+                <div id="location-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Address" value="{{sourceCase.location}}" disabled>
+                    </mat-form-field>
+                </div>
+
+                <!-- Respondee Name Input -->
+                <div id="respondee-name-div">
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Patient Name" value="{{sourceCase.patient_name}}" disabled>
+                    </mat-form-field>
+                </div>
+
+                <!-- Notes List -->
+                <div id="notes-div">
+                    <mat-form-field style="width: 100%">
+                        <textarea matInput rows="4" placeholder="Notes" value="{{sourceCase.patient_notes}}" style="width:100%;"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

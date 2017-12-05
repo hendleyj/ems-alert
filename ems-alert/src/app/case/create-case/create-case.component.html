@@ -2,40 +2,40 @@
   <!-- Header -->
   <mat-card-header>
     <mat-card-title>
-      <h2>Submit Alert</h2>
+      <h2>Create Case</h2>
     </mat-card-title>
   </mat-card-header>
 
-
-  <!-- Form -->
+  <!-- Create Form -->
   <mat-card-content>
     <form [formGroup]="caseForm" novalidate>
       <!-- Address Input -->
       <div id="location-div">
         <mat-form-field style="width: 100%">
-          <input matInput formControlName="location" placeholder="Address (i.e. 1234 N Main St, Milwaukee, WI 53211)"  ng-required>
+          <input matInput formControlName="location" placeholder="Address (Follow this format exactly: 1234 N Main St, Milwaukee, WI 53211)" value="{{location}}" ng-required>
         </mat-form-field>
       </div>
 
       <!-- Respondee Name Input -->
       <div id="respondee-name-div">
         <mat-form-field style="width: 100%">
-          <input matInput formControlName="respondee_name" placeholder="Patient Name" ng-required>
+          <input matInput formControlName="respondee_name" placeholder="Patient Name" value="{{respondee}}" ng-required>
         </mat-form-field>
       </div>
 
       <!-- Notes List -->
       <div id="notes-div">
         <mat-form-field style="width: 100%">
-          <textarea matInput rows="4" formControlName="notes" ng-required placeholder="Notes" style="width:100%;"></textarea>
+          <textarea matInput rows="4" formControlName="notes" ng-required value="{{notes}}" placeholder="Notes" style="width:100%;"></textarea>
         </mat-form-field>
       </div>
     </form>
 
     <!-- Footer -->
     <div>
+      <div *ngIf="!validAddress" class="error" fxLayoutAlign="center start" style="margin-top: 8px; color: red;">Invalid Address.</div>
       <button mat-button class="create-case-button" (click)="reset()">Cancel</button>
-      <button mat-button class="create-case-button" [disabled]="!caseForm.valid" (click)="onSubmit(); reset()">Alert</button>
+      <button mat-button class="create-case-button" [disabled]="!caseForm.valid && validAddress" (click)="onSubmit(); reset()">Alert</button>
     </div>
   </mat-card-content>
 </mat-card>

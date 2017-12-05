@@ -12,10 +12,18 @@ import { Responder } from '../responder';
     templateUrl: './create-case.component.html'
 })
 export class CreateCaseComponent implements OnInit {
+    // Update case fields
+    location = '';
+    respondee = '';
+    notes = '';
+
     caseForm: FormGroup;
 
     // Created case
     createdCase: Case;
+
+    // Address validation
+    validAddress = true;
 
     constructor(private fb: FormBuilder, private caseService: CaseService) { }
 
@@ -32,23 +40,27 @@ export class CreateCaseComponent implements OnInit {
     }
 
     public onSubmit(): void {
-        // let length = 0;
+        // Save case data
+        const loc = this.caseForm.get('location').value;
+        const respon = this.caseForm.get('respondee_name').value;
+        const not = this.caseForm.get('notes').value;
+
         this.createdCase = new Case(-1,
             this.caseService.getDate(),
-            this.caseForm.get('location').value,
-            this.caseForm.get('respondee_name').value,
+            loc,
+            respon,
             '',
             '',
-            this.caseForm.get('notes').value,
-            '');
-
+            not,
+            ''
+        );
 
         let responders: Responder[];
         const deviceIds: string[] = [];
         let latitude;
         let longitude;
 
-        // Get Responder LocationPs
+        // Get Responder Locations
         this.caseService.getAllResponders().subscribe(
             res => responders = res,
             err => console.log('error getting responders'),
@@ -56,40 +68,47 @@ export class CreateCaseComponent implements OnInit {
                 // Geocode case location
                 this.caseService.geocode(this.createdCase.location).subscribe(
                     res => {
-                        latitude = res.results[0].geometry.location.lat;
-                        longitude = res.results[0].geometry.location.lng;
+                        if (res.results.length === 0) {
+                            this.validAddress = false;
+                            this.location = loc;
+                            this.respondee = respon;
+                            this.notes = not;
+                        } else {
+                            this.validAddress = true;
+                            latitude = res.results[0].geometry.location.lat;
+                            longitude = res.results[0].geometry.location.lng;
+                        }
                     },
                     err => { },
                     () => {
-
-                        this.caseService.getCases().subscribe(
-                            result => {
-                                length = result.length;
-                                this.createdCase.id = length;
-                            },
-                            error => console.log('error'),
-                            () => {
-                                // Add case to database
-                                this.caseService.addCase(this.createdCase, latitude, longitude).subscribe(
-                                    () => {
-                                        // Send Alert
-                                        // console.log(latitude);
-                                        // console.log(longitude);
-                                        // console.log(this.createdCase);
-                                        this.caseService.sendAlert(
-                                            {
+                        if (this.validAddress) {
+                            this.caseService.getCases().subscribe(
+                                result => {
+                                    length = result.length;
+                                    this.createdCase.id = length;
+                                },
+                                error => console.log('error'),
+                                () => {
+                                    // Add case to database
+                                    this.caseService.addCase(this.createdCase, latitude, longitude).subscribe(
+                                        () => {
+                                            // Send Alert
+                                            this.caseService.sendAlert({
                                                 caseid: this.createdCase.id + '',
                                                 latitude: latitude + '',
                                                 longitude: longitude + '',
                                                 patient: this.createdCase.patient_name,
                                                 notes: this.createdCase.notes,
                                                 responders: deviceIds
-                                            }
-                                        );
-                                    }
-                                );
-                            }
-                        );
+                                            });
+                                            this.reset();
+                                        }
+                                    );
+                                }
+                            );
+                        } else {
+
+                        }
                     }
                 );
 

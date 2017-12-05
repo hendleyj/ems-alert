@@ -20,9 +20,12 @@ import { Case } from '../../case/case';
     templateUrl: './history-table.component.html',
 })
 export class HistoryTableComponent implements OnInit {
-    displayedColumns = ['caseId', 'respondeeName', 'location']; // Columns
+    displayedColumns = ['caseId', 'respondeeName', 'location', 'notes']; // Columns
     caseDatabase = new CaseDatabase(this.caseService); // "Database" connection
     dataSource: CaseDataSource | null;
+
+    // Modal variables
+    sourceCase: Case;
 
     @ViewChild('filter') filter: ElementRef; // Table filter element
 
@@ -31,16 +34,12 @@ export class HistoryTableComponent implements OnInit {
     ngOnInit() {
         // Initialize data source
         this.dataSource = new CaseDataSource(this.caseDatabase);
-
-        // Action event for filtering table
-        // Observable.fromEvent(this.filter.nativeElement, 'keyup')
-        //     .debounceTime(150)
-        //     .distinctUntilChanged()
-        //     .subscribe(() => {
-        //         if (!this.dataSource) { return; }
-        //         this.dataSource.filter = this.filter.nativeElement.value;
-        //     });
     }
+
+    setSource(case: Case) {
+        this.source = case;
+    }
+    
 }
 
 // "Database"
