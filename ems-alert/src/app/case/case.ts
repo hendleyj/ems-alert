@@ -3,20 +3,20 @@ export class Case {
     date: string;
     location: string;
     patient_name: string;
-    respondee_name: string;
+    respondee_name: string[];
     dispatcher_name: string;
     notes: string;
-    respondee_notes: string;
+    respondee_notes: string[];
 
     constructor(
         private id_new: number,
         private date_new: string,
         private location_new: string,
         private patient_name_new: string,
-        private respondee_name_new: string,
+        private respondee_name_new: string[],
         private dispatcher_name_new: string,
         private notes_new: string,
-        private respondee_notes_new: string) {
+        private respondee_notes_new: string[]) {
             this.id = id_new;
             this.date = date_new;
             this.location = location_new;

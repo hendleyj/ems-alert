@@ -36,10 +36,10 @@ export class HistoryTableComponent implements OnInit {
         this.dataSource = new CaseDataSource(this.caseDatabase);
     }
 
-    setSource(case: Case) {
-        this.source = case;
+    setSource(theCase: Case) {
+        this.sourceCase = theCase;
     }
-    
+
 }
 
 // "Database"

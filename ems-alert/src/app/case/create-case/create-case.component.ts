@@ -49,10 +49,10 @@ export class CreateCaseComponent implements OnInit {
             this.caseService.getDate(),
             loc,
             respon,
-            '',
+            [],
             '',
             not,
-            ''
+            []
         );
 
         let responders: Responder[];
@@ -93,15 +93,19 @@ export class CreateCaseComponent implements OnInit {
                                     this.caseService.addCase(this.createdCase, latitude, longitude).subscribe(
                                         () => {
                                             // Send Alert
-                                            this.caseService.sendAlert({
-                                                caseid: this.createdCase.id + '',
-                                                latitude: latitude + '',
-                                                longitude: longitude + '',
-                                                patient: this.createdCase.patient_name,
-                                                notes: this.createdCase.notes,
-                                                responders: deviceIds
-                                            });
-                                            this.reset();
+                                            if (deviceIds.length > 0) {
+                                                this.caseService.sendAlert({
+                                                    caseid: this.createdCase.id + '',
+                                                    latitude: latitude + '',
+                                                    longitude: longitude + '',
+                                                    patient: this.createdCase.patient_name,
+                                                    notes: this.createdCase.notes,
+                                                    responders: deviceIds
+                                                });
+                                                this.reset();
+                                            } else {
+                                                console.log('There are not devices to send the alert to!');
+                                            }
                                         }
                                     );
                                 }
