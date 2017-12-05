@@ -98,7 +98,7 @@ export class CreateCaseComponent implements OnInit {
                                                     caseid: this.createdCase.id + '',
                                                     latitude: latitude + '',
                                                     longitude: longitude + '',
-                                                    patient: this.createdCase.patient_name,
+                                                    patient: this.createdCase.patient_name + '',
                                                     notes: this.createdCase.notes,
                                                     responders: deviceIds
                                                 });
