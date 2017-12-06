@@ -12,7 +12,7 @@
       <!-- Address Input -->
       <div id="location-div">
         <mat-form-field style="width: 100%">
-          <input matInput formControlName="location" placeholder="Address (Follow this format exactly: 1234 N Main St, Milwaukee, WI 53211)" value="{{location}}" ng-required>
+          <input matInput formControlName="location" placeholder="Address (Follow this format exactly: 1234 N Main St, Milwaukee, WI 53211)" value="{{location}}" ng-required (input)="validateAddress()">
         </mat-form-field>
       </div>
 
@@ -35,7 +35,7 @@
     <div>
       <div *ngIf="!validAddress" class="error" fxLayoutAlign="center start" style="margin-top: 8px; color: red;">Invalid Address.</div>
       <button mat-button class="create-case-button" (click)="reset()">Cancel</button>
-      <button mat-button class="create-case-button" [disabled]="!caseForm.valid && validAddress" (click)="onSubmit(); reset()">Alert</button>
+      <button mat-button class="create-case-button" [disabled]="!caseForm.valid && !validAddress" (click)="onSubmit(); reset()">Alert</button>
     </div>
   </mat-card-content>
 </mat-card>

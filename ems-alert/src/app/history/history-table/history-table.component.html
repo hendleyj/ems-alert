@@ -33,7 +33,7 @@
         <ng-container matColumnDef="notes">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let row" fxLayoutAlign="end center">
-                <div class="click" data-toggle="modal" data-target="#myModal" (click)="setSource(row)">
+                <div class="click" data-toggle="modal" data-target="#myModal" (click)="setSource(row); modal = true;">
                     <button mat-button style="border: 1pt solid gray;">Notes</button>
                 </div>
             </mat-cell>
@@ -46,39 +46,65 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog" *ngIf="modal" style="min-height: 400px;">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <!-- Header -->
-            <div class="modal-header">
-                <h2>Update Case</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div fxLayout="row">
+                <div fxFlex="90">
+                    <h2>Case Notes</h2>
+                </div>
+                <div fxFlex="10">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
             </div>
 
             <!-- Body -->
-            <div class="modal-body">
+            <div style="margin-top: 8px;">
                 <!-- Address Input -->
-                <div id="location-div">
-                    <mat-form-field style="width: 100%">
-                        <input matInput placeholder="Address" value="{{sourceCase.location}}" disabled>
-                    </mat-form-field>
+                <div *ngIf="!existingResponder">
+                    No responders have left notes for this case.
                 </div>
-
-                <!-- Respondee Name Input -->
-                <div id="respondee-name-div">
-                    <mat-form-field style="width: 100%">
-                        <input matInput placeholder="Patient Name" value="{{sourceCase.patient_name}}" disabled>
-                    </mat-form-field>
+                <div *ngIf="existingResponder">
+                    <div *ngFor="let responder of responders; let i = index" fxLayout="row">
+                        <div>
+                            <!-- Responder Name -->
+                            <div fxFlex="50">
+                                <mat-form-field class="input">
+                                    <input matInput placeholder="Address" value="responder" disabled>
+                                </mat-form-field>
+                            </div>
+                            <!-- Responder Notes -->
+                            <div>
+                                <mat-form-field class="input">
+                                    <textarea matInput placeholder="Address" value="{{responder_notes[i]}}" disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Notes List -->
-                <div id="notes-div">
-                    <mat-form-field style="width: 100%">
-                        <textarea matInput rows="4" placeholder="Notes" value="{{sourceCase.patient_notes}}" style="width:100%;"></textarea>
-                    </mat-form-field>
-                </div>
+            </div>
             </div>
         </div>
     </div>
 </div>
+<!-- 
+                        <div id="location-div">
+                            <mat-form-field class="input">
+                                <input matInput placeholder="Address" value="{{sourceCase.location}}" disabled>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Respondee Name Input -
+                        <div id="respondee-name-div">
+                            <mat-form-field class="input">
+                                <input matInput placeholder="Patient Name" value="{{sourceCase.patient_name}}" disabled>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Notes List 
+                        <div id="notes-div">
+                            <mat-form-field class="input">
+                                <textarea matInput rows="4" placeholder="Notes" value="{{sourceCase.patient_notes}}" style="width:100%;"></textarea>
+                                </mat-form-field>
+                            </div> -->

@@ -12,23 +12,21 @@ import { Responder } from '../responder';
     templateUrl: './create-case.component.html'
 })
 export class CreateCaseComponent implements OnInit {
-    // Update case fields
-    location = '';
-    respondee = '';
-    notes = '';
-
     caseForm: FormGroup;
 
     // Created case
     createdCase: Case;
 
     // Address validation
-    validAddress = true;
+    validAddress: boolean;
+    latitude: any;
+    longitude: any;
 
     constructor(private fb: FormBuilder, private caseService: CaseService) { }
 
     ngOnInit() {
         this.createForm();
+        this.validAddress = true;
     }
 
     public createForm(): void {
@@ -37,6 +35,28 @@ export class CreateCaseComponent implements OnInit {
             respondee_name: ['', Validators.required],
             notes: ['', Validators.required]
         });
+    }
+
+    public validateAddress() {
+        const tempLocation = this.caseForm.get('location').value;
+
+        if (tempLocation.split(' ').length !== 7) {
+            this.validAddress = false;
+        } else {
+            this.caseService.geocode(tempLocation).subscribe(
+                res => {
+                    if (res.results.length === 0) {
+                        this.validAddress = false;
+                    } else {
+                        this.validAddress = true;
+                        this.latitude = res.results[0].geometry.location.lat;
+                        this.longitude = res.results[0].geometry.location.lng;
+                    }
+                },
+                err => { },
+                () => { }
+            );
+        }
     }
 
     public onSubmit(): void {
@@ -57,73 +77,46 @@ export class CreateCaseComponent implements OnInit {
 
         let responders: Responder[];
         const deviceIds: string[] = [];
-        let latitude;
-        let longitude;
 
         // Get Responder Locations
         this.caseService.getAllResponders().subscribe(
             res => responders = res,
             err => console.log('error getting responders'),
             () => {
-                // Geocode case location
-                this.caseService.geocode(this.createdCase.location).subscribe(
-                    res => {
-                        if (res.results.length === 0) {
-                            this.validAddress = false;
-                            this.location = loc;
-                            this.respondee = respon;
-                            this.notes = not;
-                        } else {
-                            this.validAddress = true;
-                            latitude = res.results[0].geometry.location.lat;
-                            longitude = res.results[0].geometry.location.lng;
-                        }
+                this.caseService.getCases().subscribe(
+                    result => {
+                        length = result.length;
+                        this.createdCase.id = length;
                     },
-                    err => { },
+                    error => console.log('error'),
                     () => {
-                        if (this.validAddress) {
-                            this.caseService.getCases().subscribe(
-                                result => {
-                                    length = result.length;
-                                    this.createdCase.id = length;
-                                },
-                                error => console.log('error'),
-                                () => {
-                                    // Add case to database
-                                    this.caseService.addCase(this.createdCase, latitude, longitude).subscribe(
-                                        () => {
-                                            // Send Alert
-                                            if (deviceIds.length > 0) {
-                                                this.caseService.sendAlert({
-                                                    caseid: this.createdCase.id + '',
-                                                    latitude: latitude + '',
-                                                    longitude: longitude + '',
-                                                    patient: this.createdCase.patient_name + '',
-                                                    notes: this.createdCase.notes,
-                                                    responders: deviceIds
-                                                });
-                                                this.reset();
-                                            } else {
-                                                console.log('There are not devices to send the alert to!');
-                                            }
-                                        }
-                                    );
+                        // Add case to database
+                        this.caseService.addCase(this.createdCase, this.latitude, this.longitude).subscribe(
+                            () => {
+                                // Send Alert
+                                if (deviceIds.length > 0) {
+                                    this.caseService.sendAlert({
+                                        caseid: this.createdCase.id + '',
+                                        latitude: this.latitude + '',
+                                        longitude: this.longitude + '',
+                                        patient: this.createdCase.patient_name + '',
+                                        notes: this.createdCase.notes,
+                                        responders: deviceIds
+                                    });
+                                    this.reset();
+                                } else {
+                                    console.log('There are no devices to send the alert to!');
                                 }
-                            );
-                        } else {
-
-                        }
+                            }
+                        );
                     }
                 );
-
-                // Compile device ids into an array
-                responders.forEach(element => {
-                    deviceIds.push(element.device_id);
-                });
             }
         );
-
-
+        // Compile device ids into an array
+        // responders.forEach(element => {
+        //     deviceIds.push(element.device_id);
+        // });
     }
 
     public reset(): void {
