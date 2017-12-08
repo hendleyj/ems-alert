@@ -45,16 +45,15 @@ export class HistoryTableComponent implements OnInit {
     setSource(data: Case) {
         this.sourceCase = data;
 
-        if (data.responder_name === undefined) {
+        if (data.respondee_name === undefined) {
             this.existingResponder = false;
         } else {
             this.existingResponder = true;
-            this.responders = data.responder_name;
+            this.responders = data.respondee_name;
             // .slice(0, data.responder_name.length - 1);
-            this.responder_notes = data.responder_notes;
+            this.responder_notes = data.respondee_notes;
             // .slice(1, data.responder_notes.length - 1);
         }
-        
     }
 }
 
@@ -112,7 +111,7 @@ export class CaseDataSource extends DataSource<any> {
 
         return Observable.merge(...displayDataChanges).map(() => {
             return this._database.data.slice().filter((item: Case) => {
-                const searchStr = (String(item.id) + item.responder_name + item.location);
+                const searchStr = (String(item.id) + item.respondee_name + item.location);
                 return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
             });
         });

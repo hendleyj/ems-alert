@@ -46,3 +46,16 @@
 h2 {
   margin-top: 8px;
 }
+
+h3 {
+  font-size: 14pt;
+  margin: 0px;
+}
+
+.table-data-row:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.content {
+  margin: 0px 8px 0px 8px;
+}

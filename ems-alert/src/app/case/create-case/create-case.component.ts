@@ -80,7 +80,15 @@ export class CreateCaseComponent implements OnInit {
 
         // Get Responder Locations
         this.caseService.getAllResponders().subscribe(
-            res => responders = res,
+            res => {
+                responders = res;
+                // Compile device ids into an array
+                responders.forEach(element => {
+                    if (element.device_id !== '') {
+                        deviceIds.push(element.device_id);
+                    }
+                });
+            },
             err => console.log('error getting responders'),
             () => {
                 this.caseService.getCases().subscribe(
@@ -113,10 +121,6 @@ export class CreateCaseComponent implements OnInit {
                 );
             }
         );
-        // Compile device ids into an array
-        // responders.forEach(element => {
-        //     deviceIds.push(element.device_id);
-        // });
     }
 
     public reset(): void {
